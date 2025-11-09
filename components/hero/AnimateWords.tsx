@@ -21,13 +21,16 @@ export const AnimateWords = ({ title, style }: AnimateWordsProps) => {
   }, [ctrls, inView]);
 
   const wordAnimation = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: {
+      opacity: 0,
+      y: 150,
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        delay: 2,
-        ease: "easeInOut", // gunakan string atau array easing valid
+        delay: 0.8,
+        ease: [0.2, 0.65, 0.3, 0.9] as any, // 👈 tambahkan `as any` agar TypeScript tidak salah paham
         duration: 1,
       },
     },
@@ -50,12 +53,7 @@ export const AnimateWords = ({ title, style }: AnimateWordsProps) => {
             }}
             className="flex items-center justify-center overflow-hidden"
           >
-            <motion.span
-              className={style}
-              variants={wordAnimation}
-              initial="hidden"
-              animate="visible"
-            >
+            <motion.span className={style} variants={wordAnimation}>
               {word + "\u00A0"}
             </motion.span>
           </motion.div>
